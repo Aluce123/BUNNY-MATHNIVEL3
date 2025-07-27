@@ -17,7 +17,7 @@ let pontuacao = 0;
 
 let plataformas =[];
 
-let nivelAtual = 3;
+let nivelAtual = 1;
 
 function preload(){
 imagemfundo = loadImage('imagens/Sample.png')
@@ -226,6 +226,28 @@ console.log(nivelAtual)
 pontuacao +=25
 }else{
  estadoJogo="errouQuiz";
+}}else if(nivelAtual==4){
+let resposta = prompt ("9x - 4x + 10 = 7x - 30 \n a)18 \n b)20 \n c)7 \n d)9 ");
+if(resposta && resposta.toLowerCase() ==="b" ){
+alert("Resposta correta! Indo para o próximo nível...");
+estadoJogo="acertouQuiz";
+nivelAtual++
+iniciarNivel(nivelAtual);
+console.log(nivelAtual)
+pontuacao +=25
+}else{
+ estadoJogo="errouQuiz";
+}}else if(nivelAtual==5){
+let resposta = prompt ("(3x - 5)/2 + 4 = (2x + 7)/3 + 5 \n a)5 \n b)7 \n c)12 \n d)6  \n obs.: / é igual a fração");
+if(resposta && resposta.toLowerCase() ==="d" ){
+alert("Resposta correta! Indo para o próximo nível...");
+estadoJogo="acertouQuiz";
+nivelAtual++
+iniciarNivel(nivelAtual);
+console.log(nivelAtual)
+pontuacao +=25
+}else{
+ estadoJogo="errouQuiz";
 }}
 }
 
@@ -244,6 +266,16 @@ function reiniciar(){
   Matter.Body.setPosition(jogador.corpo, {x:150, y:height -250});
 estadoJogo="jogando";}
 else if(nivelAtual===3){
+  pegouChave=false
+  pegouMoeda=false
+  Matter.Body.setPosition(jogador.corpo, {x:150, y:height -250});
+estadoJogo="jogando";}
+else if(nivelAtual===4){
+  pegouChave=false
+  pegouMoeda=false
+  Matter.Body.setPosition(jogador.corpo, {x:150, y:height -250});
+estadoJogo="jogando";}
+else if(nivelAtual===5){
   pegouChave=false
   pegouMoeda=false
   Matter.Body.setPosition(jogador.corpo, {x:150, y:height -250});
@@ -303,6 +335,10 @@ function iniciarNivel(nivel){
     nivel2();///=== é comparação 
   }else if(nivel===3){
     nivel3();
+  }else if(nivel===4){
+    nivel4();
+  }else if(nivel===5){
+    nivel5();
   }
 
 }
@@ -329,16 +365,54 @@ function nivel3(){
   estadoJogo="jogando";
    
    jogador = new Jogador (150, height - 250, 50, 50);
-    porta = new Porta(1800, height -1400, 100, 100);
+    porta = new Porta(2100, height -1150, 100, 100);
     chave = new Chave(1400, height -1050,70,70 )
-    moeda = new Moeda(500, height -700, 50, 50);
+    moeda = new Moeda(800, height -600, 50, 50);
 
-plataformas.push(new Plataformas(1800, height - 1400, 200, 20));  
-plataformas.push(new Plataformas(1100, height - 850, 150, 20));   
-plataformas.push(new Plataformas(1300, height - 1100, 180, 20)); 
-plataformas.push(new Plataformas(600, height - 700, 150, 20));        
-plataformas.push(new Plataformas(100, height - 200, 250, 20));    
+ plataformas.push(new Plataformas(100, height - 150, 200, 20));       // inicial
+  plataformas.push(new Plataformas(500, height - 300, 150, 20));       // salto horizontal médio
+  plataformas.push(new Plataformas(900, height - 750, 120, 20));       // precisa de precisão
+  plataformas.push(new Plataformas(1250, height - 950, 150, 20));      // boa para recuperar impulso
+  plataformas.push(new Plataformas(1700, height - 700, 150, 20));      // mais difícil
+  plataformas.push(new Plataformas(2100, height - 1100, 150, 20));     // onde está a chave
+}
 
+function nivel4(){
+    pegouChave=false
+  estadoJogo="jogando";
+   
+ jogador = new Jogador(150, height - 250, 50, 50);
+porta = new Porta(2400, height - 1200, 100, 100);
+chave = new Chave(1850, height - 800, 70, 70);
+moeda = new Moeda(1100, height - 500, 50, 50);
+
+plataformas.push(new Plataformas(100, height - 150, 200, 20));        // inicial
+plataformas.push(new Plataformas(500, height - 300, 150, 20));        // salto 1
+plataformas.push(new Plataformas(850, height - 500, 120, 20));        // moeda
+plataformas.push(new Plataformas(1250, height - 700, 150, 20));       // impulso
+plataformas.push(new Plataformas(1700, height - 800, 150, 20));       // chave
+plataformas.push(new Plataformas(2100, height - 1000, 150, 20));      // final
+plataformas.push(new Plataformas(2400, height - 1150, 150, 20));    
+
+}
+
+function nivel5(){
+    pegouChave=false
+  estadoJogo="jogando";
+   
+ jogador = new Jogador(150, height - 250, 50, 50);
+  porta = new Porta(2800, height - 1200, 100, 100);
+  chave = new Chave(2200, height - 950, 70, 70);
+  moeda = new Moeda(1400, height - 700, 50, 50);
+
+  plataformas.push(new Plataformas(100, height - 150, 180, 20));
+  plataformas.push(new Plataformas(500, height - 400, 150, 20));
+  plataformas.push(new Plataformas(900, height - 650, 120, 20));
+  plataformas.push(new Plataformas(1300, height - 750, 150, 20));
+  plataformas.push(new Plataformas(1700, height - 600, 100, 20));
+  plataformas.push(new Plataformas(2100, height - 850, 130, 20));
+  plataformas.push(new Plataformas(2500, height - 1000, 150, 20));
+  plataformas.push(new Plataformas(2800, height - 1150, 200, 20));
 }
 
 function removerTudo(){
